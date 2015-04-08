@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="gemstore">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Gem Store</title>
+
+    <!-- Bootstrap -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/app.css" rel="stylesheet">
+
+</head>
+<body ng-controller="StoreController as store">
+<!-- store is an alias of our StoreController -->
+
+<!-- begin main container -->
+<div class="container">
+
+    <!--begin navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Angular Gem Store</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- end of navbar -->
+
+
+
+
+    <!-- begin our product listing -->
+    <ul class="list-group">
+
+        <!-- loop through our products array in our StoreController -->
+        <li class="list-group-item" ng-repeat="product in store.products">
+
+            <!-- product name and image -->
+            <h3>
+                {{ product.name }}
+                <em class="pull-right">{{ product.price | currency }}</em>
+            </h3>
+            <img ng-src="{{ product.images[0].full }}"/>
+
+
+            <!-- 3 tab panels -->
+            <section ng-controller="PanelController as panel">
+
+                <!-- begin tab navigation -->
+                <ul class="nav nav-pills">
+
+                    <!-- we are passing in an object and expression to evaluate
+                    to determine if active should be set -->
+                    <li ng-class="{ active:panel.isSelected(1) }">
+                        <a href ng-click="panel.selectTab(1)">Description</a>
+                    </li>
+                    <li ng-class="{ active:panel.isSelected(2) }">
+                        <a href ng-click="panel.selectTab(2)">Specifications</a>
+                    </li>
+                    <li ng-class="{ active:panel.isSelected(3) }">
+                        <a href ng-click="panel.selectTab(3)">Reviews</a>
+                    </li>
+                </ul>
+                <!-- end tab navigation -->
+
+                <!-- begin tab panels -->
+                <div class="panel" ng-show="panel.isSelected(1)">
+                    <h4>Description</h4>
+                    <p>{{ product.description }}</p>
+                </div>
+                <div class="panel" ng-show="panel.isSelected(2)">
+                    <h4>Specifications</h4>
+                    <blockquote>None yet</blockquote>
+                </div>
+                <div class="panel" ng-show="panel.isSelected(3)">
+                    <h4>Reviews</h4>
+                    <blockquote>None yet</blockquote>
+                </div>
+                <!-- end tab panels -->
+
+            </section>
+
+            <!-- only show this button if canPurchase is true -->
+            <button ng-show="product.canPurchase" class="btn btn-default">Add to Cart</button>
+
+        </li>
+    </ul>
+    <!-- end product listing -->
+
+
+
+
+
+
+</div>
+<!-- end main container -->
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+<!-- Angular JS -->
+<script src="lib/angular/angular.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
