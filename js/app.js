@@ -66,6 +66,32 @@
 
     /**
      *
+     * review controller
+     * used for submitting product reviews
+     *
+     */
+    app.controller('ReviewController', function() {
+
+        //empty review object
+        this.review = {};
+
+        //function to submit reviews
+        this.addReview = function(product) {
+
+            // pushing the controllr's review (this.review) onto the reviews array
+            product.reviews.push(this.review);
+
+            //clear out the form and hide live preview
+            this.review = {};
+        };
+
+    });
+    //end review controller
+
+
+
+    /**
+     *
      * gem products - javascript objects
      * this is what we are selling in our store
      *
@@ -82,11 +108,21 @@
                 {
                     full: 'img/gem-01.gif',
                     thumb: 'img/gem-01.gif'
-                },
+                }
                 // this is an image object
                 // repo for images: https://github.com/suryatech/codeschool-shaping-up-with-angular/
+            ],
+            reviews: [
                 {
+                    stars: 5,
+                    body: "I love this product!",
+                    author: "joe@thomas.com"
 
+                },
+                {
+                    stars: 1,
+                    body: "This product sucks",
+                    author: "tim@hater.com"
                 }
             ]
         },
@@ -100,6 +136,19 @@
                 {
                     full: 'img/gem-02.gif',
                     thumb: 'img/gem-02.gif'
+                }
+            ],
+            reviews: [
+                {
+                    stars: 3,
+                    body: "I think this gem was just OK, could Honnestly use more shine, IMO.",
+                    author: "JimmyDean@sausage.com"
+
+                },
+                {
+                    stars: 4,
+                    body: "Any gem with 12 faces is for me!",
+                    author: "gemsRock@alyssaNicoll.com"
                 }
             ]
         }

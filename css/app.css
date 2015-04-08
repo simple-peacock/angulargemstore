@@ -1,0 +1,16 @@
+/**
+ *
+ * Angular form validation
+ * .ng-dirty is included so colour doesn't show until we start typing
+ *
+ */
+
+/*red border for invalid*/
+.ng-invalid.ng-dirty {
+    border-color: #FA787E;
+}
+
+/*green border for valid*/
+.ng-valid.ng-dirty {
+    border-color: #78FA89;
+}
