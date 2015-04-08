@@ -46,97 +46,15 @@
 
             <!-- product name and image -->
             <h3>
-                {{ product.name }}
-                <em class="pull-right">{{ product.price | currency }}</em>
+                <product-title></product-title>
             </h3>
+            <!-- using a custom directive defined in our app.js
+             we could have also used ng-include -->
+
             <img ng-src="{{ product.images[0].full }}"/>
 
-
-            <!-- 3 tab panels -->
-            <section ng-controller="PanelController as panel">
-
-                <!-- begin tab navigation -->
-                <ul class="nav nav-pills">
-
-                    <!-- we are passing in an object and expression to evaluate
-                    to determine if active should be set -->
-                    <li ng-class="{ active:panel.isSelected(1) }">
-                        <a href ng-click="panel.selectTab(1)">Description</a>
-                    </li>
-                    <li ng-class="{ active:panel.isSelected(2) }">
-                        <a href ng-click="panel.selectTab(2)">Specifications</a>
-                    </li>
-                    <li ng-class="{ active:panel.isSelected(3) }">
-                        <a href ng-click="panel.selectTab(3)">Reviews</a>
-                    </li>
-                </ul>
-                <!-- end tab navigation -->
-
-                <!-- begin tab panels - this holds the panel content -->
-                <div class="panel" ng-show="panel.isSelected(1)">
-                    <h4>Description</h4>
-                    <p>{{ product.description }}</p>
-                </div>
-                <div class="panel" ng-show="panel.isSelected(2)">
-                    <h4>Specifications</h4>
-                    <blockquote>None yet</blockquote>
-                </div>
-                <div class="panel" ng-show="panel.isSelected(3)">
-                    <h4>Reviews</h4>
-
-                    <!-- list reviews for this product -->
-                    <blockquote ng-repeat="review in product.reviews">
-                        <b>Stars {{ review.stars }}</b>
-                        {{ review.body }}
-                        <cite>- {{ review.author }}</cite>
-                    </blockquote>
-                    <!-- end listing product reviews -->
-
-                    <!-- begin review form -->
-                    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
-                    ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
-                    <!-- using ng-submit to submit the form, we are sending in the current product object,
-                    also using angular validation, $valid is an inbuilt angular property -->
-
-                        <!-- live preview section -->
-                        <blockquote>
-                            <b>Stars {{ reviewCtrl.review.stars }}</b>
-                            {{ reviewCtrl.review.body }}
-                            <cite>- {{ reviewCtrl.review.author }}</cite>
-                        </blockquote>
-                        <!-- end live preview section -->
-
-
-                        <div class="form-group">
-                            <label>Rate this product</label>
-                            <select class="form-control" ng-model="reviewCtrl.review.stars" required>
-                            <!-- using ng-model directive for live preview -->
-                                <option value="1">1 Star</option>
-                                <option value="2">2 Stars</option>
-                                <option value="3">3 Stars</option>
-                                <option value="4">4 Stars</option>
-                                <option value="5">5 Stars</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <textarea ng-model="reviewCtrl.review.body" placeholder="Write a short review of the product..." class="form-control" rows="3" required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="Email Address" required>
-                        </div>
-
-                        <input type="submit" class="btn btn-default value="Submit"/>
-
-                    </form>
-                    <!-- end review form -->
-
-                </div>
-                <!-- end tab panels -->
-
-            </section>
-            <!-- end tab panels -->
+            <!-- custom directive for our 3 product panels, includes controller -->
+            <product-panels></product-panels>
 
             <!-- only show this button if canPurchase is true -->
             <button ng-show="product.canPurchase" class="btn btn-default">Add to Cart</button>
