@@ -1,28 +1,46 @@
 /**
+ *
  * app.js
  * our main application code
- *
  *
  */
 'use strict'; // to help pickup errors
 
 
+
 // wrapping our entire application in a closure
 (function(){
 
-    // setting up our app
+    /**
+     *
+     * setting up our app
+     *
+     */
     var app = angular.module('gemstore', []);
 
-    // main controller
+
+
+    /**
+     *
+     * our main controller
+     *
+     */
     app.controller('StoreController', function() {
 
-        // product is a property of our controller
+        // products is now a property of our controller
         this.products = gems;
 
     });
     // end main controller
 
-    // panel controller
+
+
+    /**
+     *
+     * panel controller
+     * affects behavious of our 3 tabs - description, specifications, reviews
+     *
+     */
     app.controller('PanelController', function() {
 
         // setting tab as a property of this controller
@@ -42,11 +60,16 @@
         };
 
     });
+    // end panel controller
 
 
 
-    // our gem products: javascript objects
-    // this is what we are selling in our store
+    /**
+     *
+     * gem products - javascript objects
+     * this is what we are selling in our store
+     *
+     */
     var gems = [
         {
             name: 'Dodecahedron',
@@ -80,6 +103,9 @@
                 }
             ]
         }
-    ]; // end of our gems products array
+    ];
+    // end of our gems products array
+
 
 })();
+// end closure
